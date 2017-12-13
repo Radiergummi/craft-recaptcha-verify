@@ -11,6 +11,7 @@ namespace radiergummi\recaptchaverify;
 
 use Craft;
 use craft\base\Plugin;
+use craft\events\ModelEvent;
 use craft\events\RegisterUrlRulesEvent;
 use craft\web\twig\variables\CraftVariable;
 use craft\web\UrlManager;
@@ -18,6 +19,7 @@ use radiergummi\recaptchaverify\models\Settings;
 use radiergummi\recaptchaverify\services\Recaptcha as RecaptchaService;
 use radiergummi\recaptchaverify\variables\RecaptchaVariable;
 use yii\base\Event;
+use function class_exists;
 
 /**
  * Class RecaptchaVerify
@@ -78,6 +80,30 @@ class RecaptchaVerify extends Plugin {
                 $variable->set( 'recaptcha', RecaptchaVariable::class );
             }
         );
+
+        // check if the ContactForm plugin is available
+        if ( class_exists( 'craftcms\\contactform\\models\\Submission' ) ) {
+            Event::on(
+                craftcms\contactform\models\Submission::class,
+                craftcms\contactform\models\Submission::EVENT_BEFORE_VALIDATE,
+                function( ModelEvent $event ) {
+                    /** @var craftcms\contactform\models\Submission $submission */
+                    $submission = $event->sender;
+
+                    // check if the token is set and verify it
+                    $validates  =
+                        is_string( $submission->token ) &&
+                        $this->recaptcha->verifyToken( $submission->token );
+
+                    if ( ! $validates ) {
+                        $submission->addError( 'token', Craft::t(
+                            'recaptcha',
+                            'Could not validate Recaptcha token' )
+                        );
+                        $event->isValid = false;
+                    }
+                } );
+        }
 
         Craft::info(
             Craft::t(
