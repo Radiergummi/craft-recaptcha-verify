@@ -47,9 +47,11 @@ class VerifyController extends Controller {
             throw new BadRequestHttpException( Craft::t( 'recaptcha-verify', 'No token in request' ) );
         }
 
+        $verification = RecaptchaVerify::getInstance()->recaptcha->verifyToken( $token );
+
         return $this
             ->asJson( [
-                          'status' => RecaptchaVerify::getInstance()->recaptcha->verifyToken( $token )
+                          'status' => $verification
                               ? 'success'
                               : 'failed'
                       ] );
