@@ -1,0 +1,51 @@
+{
+  "name":         "radiergummi/recaptcha-verify",
+  "description":  "Verifies Recaptcha with Google's API",
+  "type":         "craft-plugin",
+  "version":      "1.0.0",
+  "keywords":     [
+    "craft",
+    "cms",
+    "craftcms",
+    "craft-plugin",
+    "recaptcha",
+    "google"
+  ],
+  "support":      {
+    "docs":   "https://github.com/Radiergummi/craft-recaptcha-verify/recaptcha-verify/blob/master/README.md",
+    "issues": "https://github.com/Radiergummi/craft-recaptcha-verify/recaptcha-verify/issues"
+  },
+  "license":      "MIT",
+  "authors":      [
+    {
+      "name":     "Moritz Friedrich",
+      "homepage": "https://www.moritzfriedrich.com"
+    }
+  ],
+  "require":      {
+    "craftcms/cms": "^3.0.0-RC1"
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url":  "https://asset-packagist.org"
+    }
+  ],
+  "autoload":     {
+    "psr-4": {
+      "radiergummi\\recaptchaverify\\": "src/"
+    }
+  },
+  "extra":        {
+    "name":          "Recaptcha Verify",
+    "handle":        "recaptcha-verify",
+    "schemaVersion": "1.0.0",
+    "hasCpSettings": true,
+    "hasCpSection":  false,
+    "changelogUrl":  "https://raw.githubusercontent.com/Radiergummi/craft-recaptcha-verify/master/CHANGELOG.md",
+    "components":    {
+      "recaptcha": "radiergummi\\recaptchaverify\\services\\Recaptcha"
+    },
+    "class":         "radiergummi\\recaptchaverify\\RecaptchaVerify"
+  }
+}

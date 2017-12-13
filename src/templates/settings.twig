@@ -1,0 +1,36 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{#
+/**
+ * Recaptcha Verify plugin for Craft CMS 3.x
+ *
+ * Recaptcha Verify Settings.twig
+ *
+ * @author    Moritz Friedrich
+ * @copyright Copyright (c) 2017 Moritz Friedrich
+ * @link      https://www.moritzfriedrich.com
+ * @package   RecaptchaVerify
+ * @since     1.0.0
+ */
+#}
+
+{% import "_includes/forms" as forms %}
+
+{% do view.registerAssetBundle("radiergummi\\recaptchaverify\\assetbundles\\recaptchaverify\\RecaptchaVerifyAsset") %}
+
+<p>
+  {{ 'Please fill in your Recaptcha API credentials. To get yours, please look <a href="https://www.google.com/recaptcha/admin">here</a>.' | translate('recaptchaverify') }}
+</p>
+
+{{ forms.textField({
+  label: 'Site key' | translate('recaptchaverify'),
+  instructions: 'Your Recaptcha site key' | translate('recaptchaverify'),
+  id: 'siteKey',
+  name: 'siteKey',
+  value: settings['siteKey']}) }}
+
+{{ forms.textField({
+  label: 'Secret' | translate('recaptchaverify'),
+  instructions: 'Your Recaptcha site secret' | translate('recaptchaverify'),
+  id: 'secret',
+  name: 'secret',
+  value: settings['secret']}) }}
