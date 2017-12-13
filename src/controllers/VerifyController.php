@@ -12,6 +12,7 @@ namespace radiergummi\recaptchaverify\controllers;
 use Craft;
 use craft\web\Controller;
 use radiergummi\recaptchaverify\RecaptchaVerify;
+use yii\web\Response;
 
 /**
  * @author    Moritz Friedrich
@@ -33,18 +34,24 @@ class VerifyController extends Controller {
     /**
      * verifies the supplied token
      *
-     * @return bool
+     * @return Response
      * @throws \yii\web\BadRequestHttpException
      */
-    public function actionIndex(): bool {
+    public function actionIndex(): Response {
         $this->requirePostRequest();
 
         $token = Craft::$app->getRequest()->getBodyParam( 'token' );
 
         if ( ! $token ) {
-            return false;
+            return $this
+                ->asJson( [ 'error' => Craft::t( 'recaptcha-verify', 'No token in request' ) ] );
         }
 
-        return RecaptchaVerify::getInstance()->recaptcha->verifyToken( $token );
+        return $this
+            ->asJson( [
+                          'status' => RecaptchaVerify::getInstance()->recaptcha->verifyToken( $token )
+                              ? 'success'
+                              : 'failed'
+                      ] );
     }
 }
