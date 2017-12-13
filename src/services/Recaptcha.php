@@ -37,7 +37,7 @@ class Recaptcha extends Component {
             Craft::warning(
                 Craft::t(
                     'recaptcha-verify',
-                    'Secret is not configured. Recaptchas will not be validated without one.',
+                    'Secret is not configured. Recaptcha will not be validated without one.',
                     [ 'token' => $token ]
                 ),
                 __METHOD__ );
