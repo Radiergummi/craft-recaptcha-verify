@@ -1,7 +1,11 @@
-Recaptcha Verify plugin for Craft CMS 3.x
+Recaptcha Verify plugin for Craft CMS 3.x 
 =========================================
 Verifies Recaptcha with Google's API.
 
+[![Latest Stable Version](https://poser.pugx.org/radiergummi/recaptcha-verify/v/stable)](https://packagist.org/packages/radiergummi/recaptcha-verify)
+[![Latest Unstable Version](https://poser.pugx.org/radiergummi/recaptcha-verify/v/unstable)](https://packagist.org/packages/radiergummi/recaptcha-verify)
+[![License](https://poser.pugx.org/radiergummi/recaptcha-verify/license)](https://packagist.org/packages/radiergummi/recaptcha-verify)
+[![Total Downloads](https://poser.pugx.org/radiergummi/recaptcha-verify/downloads)](https://packagist.org/packages/radiergummi/recaptcha-verify)
 
 Requirements
 ------------
