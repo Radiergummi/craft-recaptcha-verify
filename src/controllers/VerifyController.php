@@ -41,6 +41,14 @@ class VerifyController extends Controller {
 
         $token = Craft::$app->getRequest()->getBodyParam( 'token' );
 
+        Craft::trace(
+            Craft::t(
+                'recaptcha-verify',
+                'Verified token {token}',
+                [ 'token' => $token ]
+            ),
+        __METHOD__ );
+
         return RecaptchaVerify::getInstance()->recaptcha->verifyToken( $token );
     }
 }
