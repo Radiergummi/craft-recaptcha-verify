@@ -41,7 +41,7 @@ class VerifyController extends Controller {
 
         $token = Craft::$app->getRequest()->getBodyParam( 'token' );
 
-        if (! $token) {
+        if ( ! $token ) {
             return false;
         }
 
